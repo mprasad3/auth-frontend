@@ -69,16 +69,18 @@ export const AuthProvider = ({ children }) => {
       });
 
       const data = await response.json();
-
+    
       if (data.success) {
         // Fetch user profile after successful login
         const profileResponse = await fetch(`${API_URL}/api/profile`, {
           method: "GET",
           credentials: "include",
         });
-
+    console.log("profile response authcontext : ",profileResponse);
+        
         if (profileResponse.ok) {
           const profileData = await profileResponse.json();
+          console.log("profile data authcontext : ",profileData);
           setUser({
             name: profileData.message.split(" ").pop(), // Extract name from welcome message
             email: profileData.email,
